@@ -70,7 +70,6 @@ class TodoModel {
     else if (todo === this.todos.length-1)
       this.todos = this.todos.slice(0, this.todos.length-1);
     else {
-      let todo = this.getTodo(id).i;
       let left = this.todos.slice(0, todo);
       let right = this.todos.slice(todo+1, this.todos.length);
       this.todos = [...left, ...right];
