@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/everettmorgan/simple-todo/issues"
   },
-  "homepage": "https://github.com/everettmorgan/simple-todo#readme"
+  "homepage": "https://github.com/everettmorgan/simple-todo#readme",
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
 }
