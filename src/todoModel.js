@@ -2,28 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-var id = -1;
-var todos = [];
-
 /**
  * @class TodoModel
- *
- * Title
- * Due Date
- * Status
- * Description
  */
 class TodoModel {
-  constructor(title, due, desc) {
-    this.id = id++;
-    this.title = title;
-    this.due = due;
-    this.desc = desc;
-    this.status = false;
-  }
-
-  get todos() {
-    return todos;
+  constructor() {
+    this.id = -1;
+    this.todos = [];
   }
 
   /**
@@ -39,18 +24,26 @@ class TodoModel {
    * @param {Number} id
    */
   getTodo(id) {
-    let t = todos.find((t, i) => (t.id === parseInt(id)) ? t : null);
+    let t = this.todos.find((t, i) => (t.id === parseInt(id)) ? t : null);
     if (!t) throw new Error(`did not find Todo.id(${t.id})`);
     return t;
   }
 
   /**
-   * adds a Todo to the global array
-   * @param {TodoModel} todo
+   * adds a Todo to the model
+   * @param {String} title
+   * @param {String} due
+   * @param {String} desc
    */
   addTodo(title, due, desc) {
-    todos.push(new TodoModel(title, due, desc));
-    this.onChange(todos);
+    this.todos.push({
+      id: this.id++,
+      title: title,
+      due: due,
+      desc: desc,
+      status: false,
+    });
+    this.onChange(this.todos);
   }
 
   /**
@@ -63,7 +56,7 @@ class TodoModel {
     let todo = this.getTodo(id);
     if (Object.prototype.hasOwnProperty.call(todo, prop))
       todo[prop] = newVal;
-    this.onChange(todos);
+    this.onChange(this.todos);
   }
 
   /**
@@ -72,10 +65,10 @@ class TodoModel {
    */
   removeTodo(id) {
     let todo = this.getTodo(id);
-    let left = todos.splice(0, todo-1);
-    let right = todos.splice(todo+1, todos.length);
+    let left = this.todos.splice(0, todo-1);
+    let right = this.todos.splice(todo+1, this.todos.length);
     todos = [...left, ...right];
-    this.onChange(todos);
+    this.onChange(this.todos);
   }
 }
 
