@@ -14,7 +14,8 @@
       }
 
       #todos {
-        width: 750px;
+        max-width: 750px;
+        width: 100%;
       }
 
       .todo {
@@ -28,8 +29,11 @@
         padding: 0 5px;
       }
 
-      .completed-todo {
-        text-decoration: line-through !important;
+      .p-editing {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
       }
 
       #new-todo {
@@ -37,20 +41,22 @@
         justify-content: center;
         align-items: center;
         margin: 0 auto;
-        width: 750px;
+        max-width: 750px;
+        width: 100%;
         flex-direction: column;
       }
 
       input, textarea {
         border: 3px solid #f4f4f4;
         border-radius: 3px;
+        margin: 0 0 8px 0;
+        font-size: 16px;
       }
 
       #new-todo > input[name="title"], textarea {
         width: 100%;
         max-width: 750px;
         padding: 15px;
-        font-size: 16px;
       }
 
       #new-todo > #date-time {
@@ -60,10 +66,15 @@
         padding: 0;
       }
 
+      input, textarea {
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+      }
+
       #date-time > input[name="date"], input[name="time"] {
         width: 100%;
         padding: 15px 30px;
-        font-size: 16px;
       }
 
       #new-todo > #submit {
@@ -73,10 +84,15 @@
         background-color: white;
       }
 
+      .todo-del {
+        display: inline-block;
+      }
+
     </style>
   </head>
   <body>
     <div id="new-todo">
+      <h1>Simple Todo MVC</h1>
       <input type="text" placeholder="Title" name="title">
       <div id="date-time">
         <input type="date" name="date">
