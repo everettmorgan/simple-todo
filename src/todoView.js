@@ -84,8 +84,8 @@ class TodoView {
       let p = document.createElement("p");
       p.className = "todo-title";
       p.innerText = todo.title ? todo.title : "Untitled";
-      p.onclick = (e) => e.target.edit(function (newVal) {
-        todo.title = newVal;
+      p.onclick = (e) => e.target.edit((newVal) => {
+        this.updateTodo(todo.id, 'title', newVal);
       });
       return p;
     })())
@@ -94,8 +94,8 @@ class TodoView {
       let p = document.createElement("p");
       p.className = "todo-desc";
       p.innerText = todo.desc ? todo.desc : "";
-      p.onclick = (e) => e.target.edit(function (newVal) {
-        todo.desc = newVal;
+      p.onclick = (e) => e.target.edit((newVal) => {
+        this.updateTodo(todo.id, 'desc', newVal);
       });
       return p;
     })())
