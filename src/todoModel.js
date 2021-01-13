@@ -7,7 +7,7 @@
  */
 class TodoModel {
   constructor() {
-    this.id = -1;
+    this.id = 0;
     this.todos = [];
   }
 
@@ -24,9 +24,9 @@ class TodoModel {
    * @param {Number} id
    */
   getTodo(id) {
-    let t = this.todos.find((t, i) => (t.id === parseInt(id)) ? t : null);
-    if (!t) throw new Error(`did not find Todo.id(${t.id})`);
-    return t;
+    for (let i = 0; i < this.todos.length; i++)
+      if (this.todos[i].id === parseInt(id))
+        return { i: i, t: this.todos[i] }
   }
 
   /**
@@ -53,7 +53,7 @@ class TodoModel {
    * @param {any} newVal
    */
   updateTodo(id, prop, newVal) {
-    let todo = this.getTodo(id);
+    let todo = this.getTodo(id).t;
     if (Object.prototype.hasOwnProperty.call(todo, prop))
       todo[prop] = newVal;
     this.onChange(this.todos);
@@ -64,10 +64,10 @@ class TodoModel {
    * @param {Number} id
    */
   removeTodo(id) {
-    let todo = this.getTodo(id);
+    let todo = this.getTodo(id).i;
     let left = this.todos.splice(0, todo-1);
     let right = this.todos.splice(todo+1, this.todos.length);
-    todos = [...left, ...right];
+    this.todos = [...left, ...right];
     this.onChange(this.todos);
   }
 }
