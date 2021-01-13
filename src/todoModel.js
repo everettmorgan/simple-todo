@@ -74,9 +74,8 @@ class TodoModel {
       let left = this.todos.slice(0, todo);
       let right = this.todos.slice(todo+1, this.todos.length);
       this.todos = [...left, ...right];
-      this.onChange(this.todos);
     }
-
+    this.onChange(this.todos);
   }
 }
 
