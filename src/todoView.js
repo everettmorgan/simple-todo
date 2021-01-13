@@ -6,10 +6,10 @@ class TodoView {
 
     // form
     this.form = document.querySelector('#new-todo');
-    this.new_td_title = this.form.querySelector('#new-todo input[name="title"]');
-    this.new_td_date = this.form.querySelector('#new-todo input[name="date"]');
-    this.new_td_time = this.form.querySelector('#new-todo input[name="time"]');
-    this.new_td_desc = this.form.querySelector('#new-todo textarea[name="desc"]');
+    this.new_td_title = this.form.querySelector('input[name="title"]');
+    this.new_td_date = this.form.querySelector('#date-time input[name="date"]');
+    this.new_td_time = this.form.querySelector('#date-time input[name="time"]');
+    this.new_td_desc = this.form.querySelector('textarea[name="desc"]');
 
     // To-be injected Controller methods
     this.addTodo;
@@ -34,16 +34,14 @@ class TodoView {
   displayTodos(todos) {
     if (todos) {
       this.todos.innerHTML = null;
-      todos.forEach(t => {
-        console.log(t);
-        if (!t.status)
-          this.todos.appendChild(this.createTodoElement(t));
-      })
+      for (let i = 0; i < todos.length; i++) {
+        if (!todos[i].status)
+          this.todos.appendChild(this.createTodoElement(todos[i]));
+      }
     }
   }
 
   createTodoElement(todo) {
-    console.log("Creating todo:", todo);
     let el = document.createElement("div");
     el.className = "todo";
     el.dataset.id = todo.id;
