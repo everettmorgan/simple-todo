@@ -103,6 +103,16 @@ class TodoView {
       return p;
     })())
 
+    el.appendChild((() => {
+      let h6 = document.createElement("h6");
+      h6.innerText = 'Delete';
+      h6.className = 'todo-del';
+      h6.onclick = (e) => {
+        this.removeTodo(e.target.parentNode.dataset.id);
+      }
+      return h6;
+    })());
+
     return el;
   }
 }
@@ -113,6 +123,8 @@ class TodoView {
 function startListening() {
   form = this.form;
   form.querySelector('#submit').onclick = () => {
+    if (!this.new_td_title.value || !this.new_td_date.value || !this.new_td_desc.value)
+      return;
     this.addTodo(
       this.new_td_title.value,
       this.new_td_date.value,
