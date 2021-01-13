@@ -31,21 +31,11 @@ class TodoModel {
   }
 
   /**
-   * flips a Todo's status
-   * @param {Number} id
-   */
-  flipTodo(id) {
-    let t = this.getTodo(id);
-    t.status = !t.status;
-    this.onChange(todo);
-  }
-
-  /**
    * returns a Todo based on id
    * @param {Number} id
    */
   getTodo(id) {
-    let t = todos.find((t, i) => (t.id === parseInt(id)) ? {t,i} : null);
+    let t = todos.find((t, i) => (t.id === parseInt(id)) ? t : null);
     if (!t) throw new Error(`did not find Todo.id(${t.id})`);
     return t;
   }
