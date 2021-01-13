@@ -19,7 +19,7 @@ intakes user input from the View and facilitates the dance between the View and 
 ## How to use
 
 1. Clone this reposity on your local machine
-2. Run 'npm install && npm run build'
+2. Run `npm install && npm run build`
 3. Open index.html in any major browser
 4. Add, edit, and delete todos!
 
