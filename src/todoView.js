@@ -130,7 +130,6 @@ HTMLParagraphElement.prototype.edit = function(cb) {
       input.value = tmp;
       input.onclick = (e) => e.stopPropagation();
       input.onkeydown = (e) => {
-        console.log(e);
         switch (e.key) {
           case 'Enter':
             let newVal = e.target.value;
