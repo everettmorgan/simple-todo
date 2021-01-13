@@ -75,9 +75,6 @@ class TodoView {
       input.type = 'checkbox';
       input.value = todo.status;
       input.onclick = (e) => {
-        (e.target.checked)
-        ? el.classList.add("completed-todo")
-        : el.classList.remove("completed-todo");
         this.updateTodo(input.parentNode.dataset.id, "status", true);
       }
       return input;
