@@ -104,12 +104,19 @@ HTMLParagraphElement.prototype.edit = function(cb) {
       input.className = 'p-editing';
       input.value = tmp;
       input.onclick = (e) => e.stopPropagation();
-      input.onkeypress = (e) => {
-        if (e.key === 'Enter') {
-          let newVal = e.target.value;
-          this.innerHTML = newVal;
-          this._isEditing = false;
-          cb(newVal);
+      input.onkeydown = (e) => {
+        console.log(e);
+        switch (e.key) {
+          case 'Enter':
+            let newVal = e.target.value;
+            this.innerHTML = newVal;
+            this._isEditing = false;
+            cb(newVal);
+            break;
+          case 'Escape':
+            this.innerHTML= tmp;
+            this._isEditing = false;
+            break;
         }
       }
       return input;
