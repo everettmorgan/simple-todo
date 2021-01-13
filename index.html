@@ -31,13 +31,57 @@
       .completed-todo {
         text-decoration: line-through !important;
       }
+
+      #new-todo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 750px;
+        flex-direction: column;
+      }
+
+      input, textarea {
+        border: 3px solid #f4f4f4;
+        border-radius: 3px;
+      }
+
+      #new-todo > input[name="title"], textarea {
+        width: 100%;
+        max-width: 750px;
+        padding: 15px;
+        font-size: 16px;
+      }
+
+      #new-todo > #date-time {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+      }
+
+      #date-time > input[name="date"], input[name="time"] {
+        width: 100%;
+        padding: 15px 30px;
+        font-size: 16px;
+      }
+
+      #new-todo > #submit {
+        width: 100%;
+        padding: 15px;
+        border: 3px solid #f4f4f4;
+        background-color: white;
+      }
+
     </style>
   </head>
   <body>
     <div id="new-todo">
       <input type="text" placeholder="Title" name="title">
-      <input type="date" name="date">
-      <input type="time" name="time">
+      <div id="date-time">
+        <input type="date" name="date">
+        <input type="time" name="time">
+      </div>
       <textarea placeholder="Description" name="desc"></textarea>
       <button id="submit">Submit</button>
     </div>
