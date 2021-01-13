@@ -11,6 +11,11 @@ class TodoView {
     this.new_td_time = this.form.querySelector('#new-todo input[name="time"]');
     this.new_td_desc = this.form.querySelector('#new-todo textarea[name="desc"]');
 
+    // To-be injected Controller methods
+    this.addTodo;
+    this.removeTodo;
+    this.updateTodo;
+
     startListening.apply(this);
   }
 
@@ -30,7 +35,9 @@ class TodoView {
     if (todos) {
       this.todos.innerHTML = null;
       todos.forEach(t => {
-        this.todos.appendChild(this.createTodoElement(t));
+        console.log(t);
+        if (!t.status)
+          this.todos.appendChild(this.createTodoElement(t));
       })
     }
   }
@@ -46,6 +53,12 @@ class TodoView {
       input.className = "todo-input";
       input.type = 'checkbox';
       input.value = todo.status;
+      input.onclick = (e) => {
+        (e.target.checked)
+        ? el.classList.add("completed-todo")
+        : el.classList.remove("completed-todo");
+        this.updateTodo(input.parentNode.dataset.id, "status", true);
+      }
       return input;
     })())
 

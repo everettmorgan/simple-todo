@@ -41,12 +41,14 @@ class TodoModel {
    * @param {Number} id
    */
   getTodo(id) {
-    let t = this.todos.find((t, i) => (t.id === id) ? {t,i} : null);
+    let t = todos.find((t, i) => {
+      return (t.id === parseInt(id)) ? {t,i} : null
+    });
+
+    console.log(t);
 
     if (!t) {
-      let e = new Error(`did not find Todo.id(${t.id})`);
-      e.todos = todos;
-      throw e;
+      throw new Error(`did not find Todo.id(${t.id})`);
     }
 
     return t;
