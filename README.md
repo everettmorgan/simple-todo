@@ -16,10 +16,6 @@ intakes user input from the View and facilitates the dance between the View and 
 
 ---
 
-## Requirements
-
-- webpack
-
 ## How to use
 
 1. Clone this reposity on your local machine
