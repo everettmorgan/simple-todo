@@ -14,8 +14,23 @@ represents and manages the Todo user interface via the DOM.
 
 intakes user input from the View and facilitates the dance between the View and Model.
 
+---
+
+## Requirements
+
+- webpack
+
 ## How to use
 
 1. Clone this reposity on your local machine
-2. Open index.html in any major browser
-3. Add, edit, and delete todos!
+2. Run 'webpack' to build the dist/bundle.js file
+3. Open index.html in any major browser
+4. Add, edit, and delete todos!
+
+### Tips
+
+- You can edit any Todo's title or description by clicking directing on the field you wish to edit. The application will replace the \<p> with an \<input> to intake the new value.
+
+  - Press 'Enter' after making your updates to apply the changes to the model.
+
+  - Press 'Escape' to cancel your edits after focusing on an input
