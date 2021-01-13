@@ -33,4 +33,4 @@ intakes user input from the View and facilitates the dance between the View and 
 
   - Press 'Enter' after making your updates to apply the changes to the model.
 
-  - Press 'Escape' to cancel your edits after focusing on an input
+  - Press 'Escape' to cancel your edits after focusing on an input.
