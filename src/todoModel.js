@@ -22,6 +22,10 @@ class TodoModel {
     return todos;
   }
 
+  /**
+   * injects the onChange function from the Controller
+   * @param {Function} cb
+   */
   bindOnChange(cb) {
     this.onChange = cb;
   }
@@ -41,16 +45,8 @@ class TodoModel {
    * @param {Number} id
    */
   getTodo(id) {
-    let t = todos.find((t, i) => {
-      return (t.id === parseInt(id)) ? {t,i} : null
-    });
-
-    console.log(t);
-
-    if (!t) {
-      throw new Error(`did not find Todo.id(${t.id})`);
-    }
-
+    let t = todos.find((t, i) => (t.id === parseInt(id)) ? {t,i} : null);
+    if (!t) throw new Error(`did not find Todo.id(${t.id})`);
     return t;
   }
 
