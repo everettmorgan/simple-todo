@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      #todo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #todos {
+        width: 750px;
+      }
+
+      .todo {
+        width: 100%;
+      }
+
+      .todo-title, .todo-desc {
+        display: inline-block;
+        padding: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="new-todo">
+      <input type="text" placeholder="Title" name="title">
+      <input type="date" name="date">
+      <input type="time" name="time">
+      <textarea placeholder="Description" name="desc"></textarea>
+      <button id="submit">Submit</button>
+    </div>
+    <div id="todo-container">
+      <div id="todos"></div>
+    </div>
+    <script src="./dist/bundle.js"></script>
+  </body>
+</html>
