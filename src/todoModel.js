@@ -65,10 +65,18 @@ class TodoModel {
    */
   removeTodo(id) {
     let todo = this.getTodo(id).i;
-    let left = this.todos.splice(0, todo-1);
-    let right = this.todos.splice(todo+1, this.todos.length);
-    this.todos = [...left, ...right];
-    this.onChange(this.todos);
+    if (todo === 0)
+      this.todos = this.todos.slice(1, this.todos.length);
+    else if (todo === this.todos.length-1)
+      this.todos = this.todos.slice(0, this.todos.length-1);
+    else {
+      let todo = this.getTodo(id).i;
+      let left = this.todos.slice(0, todo);
+      let right = this.todos.slice(todo+1, this.todos.length);
+      this.todos = [...left, ...right];
+      this.onChange(this.todos);
+    }
+
   }
 }
 
