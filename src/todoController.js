@@ -1,3 +1,6 @@
+/**
+ * @class TodoController
+ */
 class TodoController {
   constructor(model, view) {
     this.model = model;
@@ -11,18 +14,38 @@ class TodoController {
     this.handleOnChange(this.model.todos);
   }
 
+  /**
+   * handles Model updates -> View
+   * @param {TodoModel[]} todos
+   */
   handleOnChange(todos) {
     this.view.displayTodos(todos);
   }
 
+  /**
+   * handles new todo from View -> Model
+   * @param {String} title
+   * @param {String} due
+   * @param {String} desc
+   */
   handleAddTodo(title, due, desc) {
     this.model.addTodo(title, due, desc);
   }
 
+  /**
+   * handles removing todo from View -> Model
+   * @param {Number} id
+   */
   handleRemoveTodo(id) {
     this.model.removeTodo(id);
   }
 
+  /**
+   * handles updating todo from View -> Model
+   * @param {Number} id
+   * @param {String} prop
+   * @param {any} newVal
+   */
   handleUpdateTodo(id, prop, newVal) {
     this.model.updateTodo(id, prop, newVal);
   }

@@ -19,18 +19,34 @@ class TodoView {
     startListening.apply(this);
   }
 
+  /**
+   * injects the addTodo function from the Controller
+   * @param {Function} cb
+   */
   bindAddTodo(cb) {
     this.addTodo = cb;
   }
 
+  /**
+   * injects the removeTodo function from the Controller
+   * @param {Function} cb
+   */
   bindRemoveTodo(cb) {
     this.removeTodo = cb;
   }
 
+  /**
+   * injects the updateTodo function from the Controller
+   * @param {Function} cb
+   */
   bindUpdateTodo(cb) {
     this.updateTodo = cb;
   }
 
+  /**
+   * displays a list of Todos to the DOM
+   * @param {TodoModel[]} todos array of Todos
+   */
   displayTodos(todos) {
     if (todos) {
       this.todos.innerHTML = null;
@@ -41,6 +57,10 @@ class TodoView {
     }
   }
 
+  /**
+   * creates an HTMLElement from a Todo
+   * @param {TodoModel} todo todo to convert
+   */
   createTodoElement(todo) {
     let el = document.createElement("div");
     el.className = "todo";
@@ -84,6 +104,9 @@ class TodoView {
   }
 }
 
+/**
+ * starts listening for submits
+ */
 function startListening() {
   form = this.form;
   form.querySelector('#submit').onclick = () => {
@@ -95,6 +118,8 @@ function startListening() {
   }
 }
 
+// edit : allows users to edit <p> tags in-place and provides a
+// callback to push edits to a model.
 HTMLParagraphElement.prototype.edit = function(cb) {
   if (!this._isEditing) {
     let tmp = this.innerText;
