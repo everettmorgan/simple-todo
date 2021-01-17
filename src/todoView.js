@@ -14,7 +14,7 @@ class TodoView {
     this.new_td_time = this.form.querySelector('#date-time input[name="time"]');
     this.new_td_desc = this.form.querySelector('textarea[name="desc"]');
 
-    // To-be injected Controller methods
+    // to-be injected Controller methods
     this.addTodo;
     this.removeTodo;
     this.updateTodo;
@@ -51,13 +51,11 @@ class TodoView {
    * @param {TodoModel[]} todos array of Todos
    */
   displayTodos(todos) {
-    if (todos) {
-      this.todos.innerHTML = null;
-      for (let i = 0; i < todos.length; i++) {
-        if (!todos[i].status)
-          this.todos.appendChild(this.createTodoElement(todos[i]));
-      }
-    }
+    if (!todos) return;
+    this.todos.innerHTML = null;
+    todos.forEach((td) => {
+      this.todos.append(this.createTodoElement(td));
+    })
   }
 
   /**
@@ -72,10 +70,10 @@ class TodoView {
     el.appendChild((() => {
       let input = document.createElement("input");
       input.className = "todo-input";
-      input.type = 'checkbox';
-      input.value = todo.status;
-      input.onclick = (e) => {
-        this.updateTodo(input.parentNode.dataset.id, "status", true);
+      input.type = "checkbox";
+      input.checked = todo.status;
+      input.onclick = () => {
+        this.updateTodo(todo.id, "status", input.checked);
       }
       return input;
     })())
@@ -84,7 +82,9 @@ class TodoView {
       let p = document.createElement("p");
       p.className = "todo-title";
       p.innerText = todo.title ? todo.title : "Untitled";
-      p.onclick = (e) => e.target.edit((newVal) => {
+      if (todo.status)
+        p.classList.add("completed-todo");
+      p.onclick = () => p.edit((newVal) => {
         this.updateTodo(todo.id, 'title', newVal);
       });
       return p;
@@ -94,18 +94,32 @@ class TodoView {
       let p = document.createElement("p");
       p.className = "todo-desc";
       p.innerText = todo.desc ? todo.desc : "";
-      p.onclick = (e) => e.target.edit((newVal) => {
-        this.updateTodo(todo.id, 'desc', newVal);
+      if (todo.status)
+        p.classList.add("completed-todo");
+      p.onclick = () => p.edit((newVal) => {
+        this.updateTodo(todo.id, "desc", newVal);
+      });
+      return p;
+    })())
+
+    el.appendChild((() => {
+      let p = document.createElement("p");
+      p.className = "todo-date";
+      p.innerText = todo.due ? todo.due : "";
+      if (todo.status)
+        p.classList.add("completed-todo");
+      p.onclick = () => p.edit((newVal) => {
+        this.updateTodo(todo.id, "due", newVal);
       });
       return p;
     })())
 
     el.appendChild((() => {
       let h6 = document.createElement("h6");
-      h6.innerText = 'Delete';
-      h6.className = 'todo-del';
-      h6.onclick = (e) => {
-        this.removeTodo(e.target.parentNode.dataset.id);
+      h6.innerText = "Delete";
+      h6.className = "todo-del";
+      h6.onclick = () => {
+        this.removeTodo(todo.id);
       }
       return h6;
     })());
@@ -118,15 +132,22 @@ class TodoView {
  * starts listening for submits
  */
 function startListening() {
-  form = this.form;
-  form.querySelector('#submit').onclick = () => {
-    if (!this.new_td_title.value || !this.new_td_date.value || !this.new_td_desc.value)
-      return;
-    this.addTodo(
-      this.new_td_title.value,
-      this.new_td_date.value,
-      this.new_td_desc.value,
-    )
+  this.form.querySelector('#submit').onclick = () => {
+    let title = this.new_td_title.value;
+    let date = this.new_td_date.value;
+    let desc = this.new_td_desc.value;
+
+    if (!title || !date || !desc) {
+      this.new_td_title.style.borderColor = "red";
+      this.new_td_date.style.borderColor = "red";
+      this.new_td_desc.style.borderColor = "red";
+    }
+    else {
+      this.new_td_title.style.borderColor = "#f4f4f4";
+      this.new_td_date.style.borderColor = "#f4f4f4";
+      this.new_td_desc.style.borderColor = "#f4f4f4";
+      this.addTodo(title, date, desc);
+    }
   }
 }
 
@@ -137,8 +158,8 @@ HTMLParagraphElement.prototype.edit = function(cb) {
     let tmp = this.innerText;
     this.innerHTML = null;
     this.appendChild((() => {
-      let input = document.createElement('input');
-      input.className = 'p-editing';
+      let input = document.createElement("input");
+      input.className = "p-editing";
       input.value = tmp;
       input.onclick = (e) => e.stopPropagation();
       input.onkeydown = (e) => {
